@@ -1,0 +1,37 @@
+﻿networks:
+  db:
+    driver: bridge
+
+x-configuration: &configuration
+  command: [ "postgres", "-c", "config_file=/etc/postgresql.conf", "-c", "log_statement=none", "-c", "log_min_duration_statement=1000", "-c", "log_connections=on", "-c", "log_disconnections=on" ]
+
+x-common-env: &common-env
+  POSTGRES-USER: postgres
+  POSTGRES_PASSWORD: postgres123
+  POSTGRES_DB: ZedLiveDatabase
+
+x-healthcheck: &pg-healthcheck
+  test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+  interval: 10s
+  retries: 5
+  start_period: 10s
+
+services:
+  database:
+    image: postgres:16
+    <<: *configuration
+    volumes:
+      - ../postgres/postgresql.conf:/etc/postgresql.conf
+      - ../postgres/pg_hba.conf:/etc/pg_hba.conf
+      - pg_data:/var/lib/postgresql/data
+    container_name: database
+    ports:
+      - "5555:5432"
+    environment:
+      <<: *common-env
+    networks:
+      - db
+    healthcheck: *pg-healthcheck
+
+volumes:
+  pg_data:

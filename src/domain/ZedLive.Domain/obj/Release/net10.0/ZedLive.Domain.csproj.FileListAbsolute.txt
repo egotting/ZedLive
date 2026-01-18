@@ -1,0 +1,11 @@
+E:\repo\ZedLive\src\domain\ZedLive.Domain\bin\Release\net10.0\ZedLive.Domain.deps.json
+E:\repo\ZedLive\src\domain\ZedLive.Domain\bin\Release\net10.0\ZedLive.Domain.dll
+E:\repo\ZedLive\src\domain\ZedLive.Domain\bin\Release\net10.0\ZedLive.Domain.pdb
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ZedLive.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ZedLive.Domain.AssemblyInfoInputs.cache
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ZedLive.Domain.AssemblyInfo.cs
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ZedLive.Domain.csproj.CoreCompileInputs.cache
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ZedLive.Domain.dll
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\refint\ZedLive.Domain.dll
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ZedLive.Domain.pdb
+E:\repo\ZedLive\src\domain\ZedLive.Domain\obj\Release\net10.0\ref\ZedLive.Domain.dll
