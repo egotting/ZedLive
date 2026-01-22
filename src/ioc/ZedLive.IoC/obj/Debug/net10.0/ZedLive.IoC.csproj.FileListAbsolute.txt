@@ -5,6 +5,7 @@ E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.GeneratedMSBui
 E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.AssemblyInfoInputs.cache
 E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.AssemblyInfo.cs
 E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.csproj.CoreCompileInputs.cache
+E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.sourcelink.json
 E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.dll
 E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\refint\ZedLive.IoC.dll
 E:\repo\ZedLive\src\ioc\ZedLive.IoC\obj\Debug\net10.0\ZedLive.IoC.pdb

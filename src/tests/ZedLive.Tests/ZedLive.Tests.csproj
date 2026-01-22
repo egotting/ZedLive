@@ -19,4 +19,10 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="User\Application\CQRS\" />
+    <Folder Include="User\Context\" />
+    <Folder Include="User\UserRepository\" />
+  </ItemGroup>
+
 </Project>

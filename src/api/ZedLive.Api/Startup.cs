@@ -1,11 +1,10 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using ZedLive.Api.Configuration.Jwt;
 using ZedLive.Application.Services.Stream;
 using ZedLive.Domain.Contracts.Users.Configuration;
+using ZedLive.Domain.ValueObjects.StructType;
 using ILogger = Serilog.ILogger;
-using Stream = ZedLive.Api.Configuration.Jwt.Stream;
 
 namespace ZedLive.Api;
 
@@ -40,16 +39,16 @@ internal class Startup
 
     #region Services
 
-        services.AddOptions<Stream>()
+        services.AddOptions<StreamOptions>()
             .BindConfiguration("Stream");
-        services.AddScoped<IStreamKey, StreamKey>();
+        services.AddScoped<IStreamKeyService, StreamKeyService>();
 
     #endregion
 
 
     #region Configuration Authentication & Authorization
 
-        services.AddOptions<Jwt>()
+        services.AddOptions<JwtOptions>()
             .BindConfiguration("Jwt");
 
         services.AddAuthentication(opt =>
@@ -59,7 +58,7 @@ internal class Startup
             })
             .AddJwtBearer(opt =>
             {
-                var jwtSettings = _configuration.GetSection("Jwt").Get<Jwt>();
+                var jwtSettings = _configuration.GetSection("Jwt").Get<JwtOptions>();
                 opt.RequireHttpsMetadata = true;
                 opt.SaveToken = true;
                 opt.TokenValidationParameters = new TokenValidationParameters

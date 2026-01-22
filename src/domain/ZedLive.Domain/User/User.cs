@@ -25,8 +25,7 @@ public class User : DefaultEntities
     public static User CreateUser(string login, EmailObject email, PasswordObject password)
         => new User(login, email, password, StatusUser.Online);
 
-    private
-        public User(string login, EmailObject email, PasswordObject password, StatusUser statusUser)
+    public User(string login, EmailObject email, PasswordObject password, StatusUser statusUser)
     {
         Login = login;
         Email = email;

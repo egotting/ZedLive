@@ -7,7 +7,14 @@ E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\ZedLive.Tests.deps.jso
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\ZedLive.Tests.runtimeconfig.json
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\ZedLive.Tests.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\ZedLive.Tests.pdb
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.TestPlatform.CoreUtilities.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -16,6 +23,7 @@ E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.TestPlatform
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.TestPlatform.Utilities.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Microsoft.VisualStudio.TestPlatform.Common.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\Newtonsoft.Json.dll
+E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\xunit.abstractions.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\xunit.assert.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\bin\Debug\net10.0\xunit.core.dll
@@ -90,6 +98,7 @@ E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive.Tests.Generate
 E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive.Tests.AssemblyInfoInputs.cache
 E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive.Tests.AssemblyInfo.cs
 E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive.Tests.csproj.CoreCompileInputs.cache
+E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive.Tests.sourcelink.json
 E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive..654458C3.Up2Date
 E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\ZedLive.Tests.dll
 E:\repo\ZedLive\src\tests\ZedLive.Tests\obj\Debug\net10.0\refint\ZedLive.Tests.dll
