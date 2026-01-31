@@ -1,4 +1,3 @@
-
 namespace ZedLive.Api;
 
 public class Program
@@ -11,9 +10,6 @@ public class Program
     private static IHostBuilder CreateWebHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(wb =>
-            {
-                wb.UseStartup<Startup>();
-            });
+            .ConfigureWebHostDefaults(wb => { wb.UseStartup<Startup>(); });
     }
 }

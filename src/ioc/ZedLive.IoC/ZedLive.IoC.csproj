@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\ZedLive.Infrastructure\ZedLive.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\api\ZedLive.Api\ZedLive.Api.csproj" />
+  </ItemGroup>
+
 </Project>

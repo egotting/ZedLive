@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZedLive.IoC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56b00082765891932df308e9dadda8b32cff4311")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7be505f0cfb7b505bc42ccb39f2647ec076b09c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZedLive.IoC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZedLive.IoC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

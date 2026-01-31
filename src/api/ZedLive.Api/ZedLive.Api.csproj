@@ -8,12 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Serilog" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\application\ZedLive.Application\ZedLive.Application.csproj" />
     <ProjectReference Include="..\..\domain\ZedLive.Domain\ZedLive.Domain.csproj" />
+    <ProjectReference Include="..\..\ioc\ZedLive.IoC\ZedLive.IoC.csproj" />
   </ItemGroup>
 
 </Project>
