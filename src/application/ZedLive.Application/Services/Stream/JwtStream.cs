@@ -1,5 +1,4 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.InteropServices.ComTypes;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Logging;
@@ -10,12 +9,12 @@ using ZedLive.Domain.ValueObjects.StructType;
 
 namespace ZedLive.Application.Services.Stream;
 
-public class StreamKeyService(StreamOptions _streamOptions, ILogger<StreamKeyService> _logger) : IStreamKeyService
+public sealed class JwtStream(StreamOptions _streamOptions, ILogger<JwtStream> _logger) : IJwtStream
 {
-    public string GenerateStreamKey(User user)
+    public string Generate(User user)
     {
-        var keyPass = CreateKey();
         var tokenHandler = new JwtSecurityTokenHandler();
+        var keyPass = CreateKey();
         var key = Encoding.ASCII.GetBytes(_streamOptions.SecretKey);
         var claims = new List<Claim>
         {
@@ -42,16 +41,17 @@ public class StreamKeyService(StreamOptions _streamOptions, ILogger<StreamKeySer
         return $"{tokenConvert}-${keyPass}";
     }
 
-    private string CreateKey()
+
+    private static string CreateKey()
     {
         var random = new Random();
-        var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        const string str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-        int size = 6;
+        const int size = 6;
         var value = "";
-        for (int i = 0; i < size; i++)
+        for (var i = 0; i < size; i++)
         {
-            int x = random.Next(26);
+            var x = random.Next(26);
             value = value + str[x];
         }
 
