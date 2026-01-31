@@ -10,11 +10,11 @@ public class User : DefaultEntities
     public PasswordObject Password { get; set; }
     public IEnumerable<StatusUser> Status { get; set; }
 
-    private StreamKeyType StreamKey { get; set; }
+    public string StreamKey { get; set; }
 
 #region constrctor to EF CORE
 
-    public User()
+    private User()
     {
         // EF CORE
     }

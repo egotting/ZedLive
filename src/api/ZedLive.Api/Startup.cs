@@ -1,9 +1,12 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ZedLive.Application.Services.Stream;
 using ZedLive.Domain.Contracts.Users.Configuration;
 using ZedLive.Domain.ValueObjects.StructType;
+using ZedLive.IoC.Database;
+using ZedLive.IoC.Services;
 using ILogger = Serilog.ILogger;
 
 namespace ZedLive.Api;
@@ -25,26 +28,37 @@ internal class Startup
 
     public virtual void ConfigureServices(IServiceCollection services)
     {
+        var builder = WebApplication.CreateBuilder();
+        var connectionString = new ConnectionStringsOptions();
+
         services.AddControllers();
+
+    #region Options
+
+        services.AddOptions<StreamOptions>()
+            .BindConfiguration("Stream");
+        services.AddOptions<JwtOptions>()
+            .BindConfiguration("Jwt");
+        services.AddOptions<ConnectionStringsOptions>()
+            .BindConfiguration("DbConnection");
+
+    #endregion
 
     #region Db Configuration
 
-        
+        builder.Services.AddInfrastructure(connectionString.DbConnection);
 
     #endregion Db Configuration
-        
+
     #region Repositories
 
     #endregion
 
     #region Services
 
-        services.AddOptions<StreamOptions>()
-            .BindConfiguration("Stream");
-        services.AddScoped<IStreamKeyService, StreamKeyService>();
+        builder.Services.AddInjection();
 
     #endregion
-
 
     #region Configuration Authentication & Authorization
 
