@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace ZedLive.Domain.ValueObjects;
 
-public abstract class PasswordObject : ValueObjects
+public sealed class PasswordObject : ValueObjects
 {
     private const int SaltSize = 16;
     private const int HashSize = 32;
@@ -11,9 +11,9 @@ public abstract class PasswordObject : ValueObjects
 
     private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
 
-    [NotNull] private string Value { get; set; } = string.Empty;
+    private string Value { get; set; }
 
-    protected PasswordObject(string value)
+    public PasswordObject(string value)
     {
         if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
             throw new ArgumentException("Password Invalid");
