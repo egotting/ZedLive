@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZedLive.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7be505f0cfb7b505bc42ccb39f2647ec076b09c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3705c331622fa04d8b0d69b2fac4b7672d85c2b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZedLive.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZedLive.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
