@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[10.0.2, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -562,6 +566,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[14.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[10.0.2, )"
@@ -1254,6 +1262,12 @@
               "target": "Package",
               "version": "[10.0.2, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.2, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[10.0.0, )"
@@ -1581,8 +1595,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "E:\\repo\\ZedLive\\src\\api\\ZedLive.Api\\ZedLive.Api.csproj": {
-                "projectPath": "E:\\repo\\ZedLive\\src\\api\\ZedLive.Api\\ZedLive.Api.csproj"
+              "E:\\repo\\ZedLive\\src\\application\\ZedLive.Application\\ZedLive.Application.csproj": {
+                "projectPath": "E:\\repo\\ZedLive\\src\\application\\ZedLive.Application\\ZedLive.Application.csproj"
               },
               "E:\\repo\\ZedLive\\src\\infrastructure\\ZedLive.Infrastructure\\ZedLive.Infrastructure.csproj": {
                 "projectPath": "E:\\repo\\ZedLive\\src\\infrastructure\\ZedLive.Infrastructure\\ZedLive.Infrastructure.csproj"
@@ -1606,6 +1620,14 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[14.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[10.0.2, )"
