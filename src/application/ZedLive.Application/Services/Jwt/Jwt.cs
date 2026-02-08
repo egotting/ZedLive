@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ZedLive.Application.Services.Stream;
 using ZedLive.Domain.Contracts.Users.Configuration;
@@ -11,8 +12,10 @@ using ZedLive.Domain.ValueObjects.StructType;
 
 namespace ZedLive.Application.Services.Jwt;
 
-public sealed class Jwt(JwtOptions _jwtOptions, ILogger<Jwt> _logger) : IJwt
+public sealed class Jwt(IOptions<JwtOptions> opt, ILogger<Jwt> _logger) : IJwt
 {
+    private readonly JwtOptions _jwtOptions = opt.Value;
+
     public string Generate(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();

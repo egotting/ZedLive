@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ZedLive.Domain.Contracts.Users.Configuration;
 using ZedLive.Domain.User;
@@ -9,8 +10,10 @@ using ZedLive.Domain.ValueObjects.StructType;
 
 namespace ZedLive.Application.Services.Stream;
 
-public sealed class JwtStream(StreamOptions _streamOptions, ILogger<JwtStream> _logger) : IJwtStream
+public sealed class JwtStream(IOptions<StreamOptions> options, ILogger<JwtStream> logger) : IJwtStream
 {
+    private readonly StreamOptions _streamOptions = options.Value;
+
     public string Generate(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -37,7 +40,7 @@ public sealed class JwtStream(StreamOptions _streamOptions, ILogger<JwtStream> _
         };
         var token = tokenHandler.CreateToken(tokenDecriptor);
         var tokenConvert = tokenHandler.WriteToken(token);
-        _logger.LogInformation("Stream Key generated for user {Username}", user.Email);
+        logger.LogInformation("Stream Key generated for user {Username}", user.Email);
         return $"{tokenConvert}-${keyPass}";
     }
 
