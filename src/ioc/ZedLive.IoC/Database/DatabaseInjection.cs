@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ZedLive.Domain.ValueObjects.StructType;
@@ -8,16 +9,16 @@ namespace ZedLive.IoC.Database;
 
 public static class DatabaseInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection service,
-        string connectionStrings)
+    internal static void AddInfrastructure(this IServiceCollection service,
+        IConfiguration configuration)
     {
         service.AddDbContext<ZedLiveContext>(opt =>
             {
                 opt.EnableDetailedErrors();
                 opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-                opt.UseNpgsql(connectionStrings);
+                opt.UseNpgsql(configuration.GetConnectionString("DbConnection"),
+                    b => b.MigrationsAssembly("ZedLive.Infrastructure"));
             },
             ServiceLifetime.Scoped);
-        return service;
     }
 }

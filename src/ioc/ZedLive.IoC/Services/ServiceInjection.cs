@@ -7,11 +7,9 @@ namespace ZedLive.IoC.Services;
 
 public static class ServiceInjection
 {
-    public static IServiceCollection AddInjection(this IServiceCollection service)
+    public static void AddServices(this IServiceCollection service)
     {
         service.AddScoped<IJwtStream, JwtStream>();
         service.AddScoped<IJwt, Jwt>();
-
-        return service;
     }
 }
