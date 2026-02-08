@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ZedLive.Domain.ValueObjects;
+namespace ZedLive.Tests.User.Domain.ValueObjects;
 
 public sealed class EmailObject : ValueObjects
 {
-    [EmailAddress] public string Value { get; set; }
+    [EmailAddress] private string Value { get; set; }
 
     public EmailObject(string value)
     {

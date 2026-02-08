@@ -2,7 +2,7 @@
   command: [ "postgres", "-c", "config_file=/etc/postgresqltest.conf", "-c", "log_statement=none", "-c", "log_min_duration_statement=1000", "-c", "log_connections=on", "-c", "log_disconnections=on" ]
 
 x-common-env: &common-env
-  POSTGRES-USER: postgres
+  POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres123
   POSTGRES_DB: ZedLiveDatabaseTest
 
@@ -18,14 +18,9 @@ services:
     <<: *configuration
     volumes:
       - ../postgres/postgresqltest.conf:/etc/postgresqltest.conf
-      - ../postgres/pg_hbatest.conf:/etc/pg_hbatest.conf
-      - pg_teste:/var/lib/postgresql/data
-    container_name: database
+    container_name: dbtest
     ports:
-      - "5555:5432"
+      - "5432:5432"
     environment:
       <<: *common-env
     healthcheck: *pg-healthcheck
-
-volumes:
-  pg_teste:
