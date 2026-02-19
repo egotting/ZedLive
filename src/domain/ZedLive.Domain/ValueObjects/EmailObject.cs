@@ -4,16 +4,15 @@ namespace ZedLive.Domain.ValueObjects;
 
 public sealed class EmailObject : ValueObjects
 {
-    [EmailAddress] public string Value { get; set; }
+    [EmailAddress(ErrorMessage = "Invalid Email")]
+    public string? Value { get; set; }
 
     public EmailObject(string value)
     {
-        if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("Invalid Email");
         Value = value;
     }
 
-    public override string ToString()
+    public override string? ToString()
     {
         return Value;
     }
