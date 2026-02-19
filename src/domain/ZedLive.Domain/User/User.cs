@@ -5,21 +5,19 @@ namespace ZedLive.Domain.User;
 
 public class User : DefaultEntities
 {
-    public string Login { get; set; } = string.Empty;
+    public string? Login { get; set; } = string.Empty;
     public EmailObject Email { get; set; }
     public PasswordObject Password { get; set; }
     public IEnumerable<StatusUser> Status { get; set; }
 
     public string StreamKey { get; set; }
 
-#region constrctor to EF CORE
-
+    #region constrctor to EF CORE
     private User()
     {
         // EF CORE
     }
-
-#endregion
+    #endregion
 
 
     public static User CreateUser(string login, EmailObject email, PasswordObject password)
