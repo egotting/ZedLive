@@ -1,41 +1,74 @@
-﻿using ZedLive.Domain.Contracts.Users.Infra;
+﻿using System.Collections.Concurrent;
+using Microsoft.EntityFrameworkCore.Storage;
+using ZedLive.Domain.Contracts.Users.Infra;
+using ZedLive.Infrastructure.Data.Context;
 
 namespace ZedLive.Infrastructure.Repository.User;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork(ZedLiveContext context) : IUnitOfWork
 {
+    private bool _disposed;
+    private IDbContextTransaction? _currentTransaction;
+
+    private readonly ConcurrentDictionary<Type, object> _repositories = new();
+
     public IRepository<T> Repository<T>() where T : class
     {
-        throw new NotImplementedException();
+        return (IRepository<T>)_repositories.GetOrAdd(
+            typeof(T),
+            _ => new RepositoryBase<T>(context)
+        );
     }
 
-    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public int SaveChanges() => context.SaveChanges();
+
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+        context.SaveChangesAsync(cancellationToken);
+
+    public async Task BeginTransactionAsync()
     {
-        throw new NotImplementedException();
+        if (_currentTransaction != null) return;
+        _currentTransaction = await context.Database.BeginTransactionAsync();
     }
 
-    public Task BeginTransactionAsync()
+    public async Task CommitTransactionAsync()
     {
-        throw new NotImplementedException();
+        if (_currentTransaction is null) return;
+        await _currentTransaction.CommitAsync();
+        await _currentTransaction.DisposeAsync();
+        _currentTransaction = null;
     }
 
-    public Task CommitTransactionAsync()
+    public async Task RollbackTransactionAsync()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task RollbackTransactionAsync()
-    {
-        throw new NotImplementedException();
+        if (_currentTransaction == null) return;
+        await _currentTransaction.RollbackAsync();
+        await _currentTransaction.DisposeAsync();
+        _currentTransaction = null;
     }
 
     public void Dispose()
     {
-        // TODO release managed resources here
+        if (!_disposed)
+        {
+            context.Dispose();
+            _currentTransaction?.Dispose();
+            _disposed = true;
+        }
+
+        GC.SuppressFinalize(this);
     }
 
     public async ValueTask DisposeAsync()
     {
-        // TODO release managed resources here
+        if (!_disposed)
+        {
+            await context.DisposeAsync();
+            if (_currentTransaction != null)
+                await _currentTransaction.DisposeAsync();
+            _disposed = true;
+        }
+
+        GC.SuppressFinalize(this);
     }
 }
