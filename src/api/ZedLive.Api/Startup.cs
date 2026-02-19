@@ -1,67 +1,40 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ZedLive.Application.Services.Stream;
-using ZedLive.Domain.Contracts.Users.Configuration;
 using ZedLive.Domain.ValueObjects.StructType;
-using ZedLive.IoC.Database;
-using ZedLive.IoC.Services;
-using ILogger = Serilog.ILogger;
+using ZedLive.IoC;
 
 namespace ZedLive.Api;
 
-internal class Startup
+internal sealed class Startup
 {
-    // todo: Configurar startup
-    private readonly IConfiguration _configuration;
-    // private static ILogger _logger;
+    private readonly IConfiguration _configuration = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .AddUserSecrets<Startup>()
+        .Build();
+    // private readonly ILogger<Startup> _logger;
+    // private const string connectionString = "DbConnection";
 
-    public Startup()
+    // _logger.LogInformation("connection string: " + _configuration.GetConnectionString(connectionString));
+
+    public void ConfigureServices(IServiceCollection services)
     {
-        _configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .AddUserSecrets<Startup>()
-            .Build();
-        // _logger.Information("connection string: " + _configuration.GetConnectionString(connectionString));
-    }
-
-    public virtual void ConfigureServices(IServiceCollection services)
-    {
-        var builder = WebApplication.CreateBuilder();
-        var connectionString = new ConnectionStringsOptions();
-
         services.AddControllers();
 
-    #region Options
-
+        #region Options
         services.AddOptions<StreamOptions>()
             .BindConfiguration("Stream");
         services.AddOptions<JwtOptions>()
             .BindConfiguration("Jwt");
         services.AddOptions<ConnectionStringsOptions>()
             .BindConfiguration("DbConnection");
+        #endregion
 
-    #endregion
+        #region Dependencies
+        services.DependencyInjection(_configuration);
+        #endregion Dependencies
 
-    #region Db Configuration
-
-        builder.Services.AddInfrastructure(connectionString.DbConnection);
-
-    #endregion Db Configuration
-
-    #region Repositories
-
-    #endregion
-
-    #region Services
-
-        builder.Services.AddInjection();
-
-    #endregion
-
-    #region Configuration Authentication & Authorization
-
+        #region Configuration Authentication & Authorization
         services.AddOptions<JwtOptions>()
             .BindConfiguration("Jwt");
 
@@ -102,11 +75,10 @@ internal class Startup
                 };
             });
         services.AddAuthorization();
-
-    #endregion Configuration Authentication & Authorization
+        #endregion Configuration Authentication & Authorization
     }
 
-    public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider provider)
+    public void Configure(IApplicationBuilder app)
     {
         app.UseCors(builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
         app.UseHttpsRedirection();
