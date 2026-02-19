@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace ZedLive.Domain.ValueObjects;
 
@@ -11,7 +10,7 @@ public sealed class PasswordObject : ValueObjects
 
     private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
 
-    private string Value { get; set; }
+    public string Value { get; set; }
 
     public PasswordObject(string value)
     {
@@ -21,11 +20,11 @@ public sealed class PasswordObject : ValueObjects
         {
             < 1 => throw new ArgumentException("Need until 8 characters"),
             > 8 => throw new ArgumentException("Cannot pass the 8 characters"),
-            _ => value
+            _ => Hash(value)
         };
     }
 
-    public static string Hash(string value)
+    private static string Hash(string value)
     {
         if (string.IsNullOrEmpty(value)) throw new ArgumentException("Need put a value");
         byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
