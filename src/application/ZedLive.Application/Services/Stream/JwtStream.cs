@@ -14,7 +14,7 @@ public sealed class JwtStream(IOptions<StreamOptions> options, ILogger<JwtStream
 {
     private readonly StreamOptions _streamOptions = options.Value;
 
-    public string Generate(User user)
+    public string Generate(Domain.User.User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var keyPass = CreateKey();
@@ -22,7 +22,7 @@ public sealed class JwtStream(IOptions<StreamOptions> options, ILogger<JwtStream
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Email, user.Email.ToString()),
+            new(ClaimTypes.Email, user.Email.Value),
             new(JwtRegisteredClaimNames.Iat, _streamOptions.TimeTokenIsCreated),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Jti, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),

@@ -1,3 +1,3 @@
 ﻿namespace ZedLive.Domain.User.DTO.Request;
 
-public record LoginReq(string login, string email, string password);
+public record LoginIn(string login, string email, string password);

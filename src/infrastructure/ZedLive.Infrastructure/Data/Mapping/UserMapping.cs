@@ -23,6 +23,7 @@ public class UserMapping : IEntityTypeConfiguration<User>
             email.Property(e => e.Value)
                 .HasColumnName("email")
                 .HasColumnType("varchar")
+                .IsRequired()
                 .HasMaxLength(266);
             email.HasIndex(x => x.Value)
                 .IsUnique();
@@ -36,7 +37,13 @@ public class UserMapping : IEntityTypeConfiguration<User>
                 .HasMaxLength(8)
                 .IsRequired();
         });
-
+        
+        builder.Property(x => x.Salt)
+            .HasColumnName("salt")
+            .HasColumnType("varchar")
+            .HasMaxLength(8)
+            .IsRequired();
+        
         builder.Property(x => x.StreamKey)
             .HasColumnName("stream_key")
             .HasMaxLength(250);

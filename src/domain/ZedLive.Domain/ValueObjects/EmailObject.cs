@@ -2,17 +2,12 @@
 
 namespace ZedLive.Domain.ValueObjects;
 
-public sealed class EmailObject : ValueObjects
+public sealed class EmailObject(string value) : ValueObjects
 {
     [EmailAddress(ErrorMessage = "Invalid Email")]
-    public string? Value { get; set; }
+    public string Value { get; set; } = value;
 
-    public EmailObject(string value)
-    {
-        Value = value;
-    }
-
-    public override string? ToString()
+    public override string ToString()
     {
         return Value;
     }

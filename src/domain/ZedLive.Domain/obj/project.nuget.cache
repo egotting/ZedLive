@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ClI39UopbhM=",
+  "dgSpecHash": "cqqoegdQgRk=",
   "success": true,
-  "projectFilePath": "E:\\repo\\ZedLive\\src\\domain\\ZedLive.Domain\\ZedLive.Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/mnt/repositories/repo/ZedLive/src/domain/ZedLive.Domain/ZedLive.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/4yn/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.2/microsoft.extensions.dependencyinjection.abstractions.10.0.2.nupkg.sha512",
+    "/home/4yn/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.2/microsoft.extensions.logging.abstractions.10.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

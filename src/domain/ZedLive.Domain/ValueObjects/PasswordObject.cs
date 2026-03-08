@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using Microsoft.Extensions.Logging;
 
 namespace ZedLive.Domain.ValueObjects;
 
@@ -9,7 +10,7 @@ public sealed class PasswordObject : ValueObjects
     private const int Interations = 100000;
 
     private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
-
+    private readonly ILogger<PasswordObject> _logger;
     public string Value { get; set; }
 
     public PasswordObject(string value)
@@ -20,29 +21,29 @@ public sealed class PasswordObject : ValueObjects
         {
             < 1 => throw new ArgumentException("Need until 8 characters"),
             > 8 => throw new ArgumentException("Cannot pass the 8 characters"),
-            _ => Hash(value)
+            _ => value
         };
+         _logger.LogInformation($"Instance {nameof(PasswordObject)}");
     }
 
-    private static string Hash(string value)
+    public static (string password, string salt) Hash(string value)
     {
         if (string.IsNullOrEmpty(value)) throw new ArgumentException("Need put a value");
         byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
         byte[] hash = Rfc2898DeriveBytes.Pbkdf2(value, salt, Interations, Algorithm, HashSize);
-        return $"{Convert.ToHexString(hash)}-{Convert.ToHexString(salt)}";
+        return (Convert.ToHexString(hash), Convert.ToHexString(salt));
     }
 
-    public static bool Verify(string value, string valueHashed)
+    public static bool Verify(string value, string salt, string password)
     {
-        if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(valueHashed))
+        if (string.IsNullOrEmpty(value))
             throw new ArgumentException("Need put a value");
-        string[] parts = valueHashed.Split("-");
-
-        byte[] hash = Convert.FromHexString(parts[0]);
-        byte[] salt = Convert.FromHexString(parts[1]);
-
-        byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(value, salt, Interations, Algorithm, HashSize);
-
-        return CryptographicOperations.FixedTimeEquals(hash, inputHash);
+        byte[] saltBytes = Convert.FromBase64String(salt);
+        byte[] encrypt = Rfc2898DeriveBytes.Pbkdf2(password, saltBytes, Interations, Algorithm, HashSize);
+        
+        
+        string passwordDb = $"{Convert.FromBase64String(value)}{Convert.FromBase64String(salt)}";
+        string passwordLogin = Convert.ToString(encrypt);
+        return string.Equals(passwordLogin, passwordDb);
     }
 }

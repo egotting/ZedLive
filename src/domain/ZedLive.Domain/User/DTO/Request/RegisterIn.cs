@@ -1,3 +1,5 @@
-﻿namespace ZedLive.Domain.User.DTO.Request;
+﻿using ZedLive.Domain.ValueObjects;
 
-public record RegisterReq(string? login, string? email, string password, string confirmPassword);
+namespace ZedLive.Domain.User.DTO.Request;
+
+public record RegisterIn(string? login, EmailObject? email, PasswordObject password, string confirmPassword);

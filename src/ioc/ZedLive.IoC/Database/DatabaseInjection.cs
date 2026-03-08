@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ZedLive.Domain.ValueObjects.StructType;
 using ZedLive.Infrastructure.Data.Context;
@@ -17,7 +18,7 @@ public static class DatabaseInjection
                 opt.EnableDetailedErrors();
                 opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 opt.UseNpgsql(configuration.GetConnectionString("DbConnection"),
-                    b => b.MigrationsAssembly("ZedLive.Infrastructure"));
+                    b => b.MigrationsAssembly("ZedLive.Infrastructure")).LogTo(Console.WriteLine, LogLevel.Information);
             },
             ServiceLifetime.Scoped);
     }

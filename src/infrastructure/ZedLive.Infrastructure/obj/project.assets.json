@@ -825,6 +825,9 @@
       "ZedLive.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.2"
+        },
         "compile": {
           "bin/placeholder/ZedLive.Domain.dll": {}
         },
@@ -2666,39 +2669,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/4yn/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\repo\\ZedLive\\src\\infrastructure\\ZedLive.Infrastructure\\ZedLive.Infrastructure.csproj",
+      "projectUniqueName": "/mnt/repositories/repo/ZedLive/src/infrastructure/ZedLive.Infrastructure/ZedLive.Infrastructure.csproj",
       "projectName": "ZedLive.Infrastructure",
-      "projectPath": "E:\\repo\\ZedLive\\src\\infrastructure\\ZedLive.Infrastructure\\ZedLive.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\repo\\ZedLive\\src\\infrastructure\\ZedLive.Infrastructure\\obj\\",
+      "projectPath": "/mnt/repositories/repo/ZedLive/src/infrastructure/ZedLive.Infrastructure/ZedLive.Infrastructure.csproj",
+      "packagesPath": "/home/4yn/.nuget/packages/",
+      "outputPath": "/mnt/repositories/repo/ZedLive/src/infrastructure/ZedLive.Infrastructure/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/4yn/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/lib64/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "E:\\repo\\ZedLive\\src\\domain\\ZedLive.Domain\\ZedLive.Domain.csproj": {
-              "projectPath": "E:\\repo\\ZedLive\\src\\domain\\ZedLive.Domain\\ZedLive.Domain.csproj"
+            "/mnt/repositories/repo/ZedLive/src/domain/ZedLive.Domain/ZedLive.Domain.csproj": {
+              "projectPath": "/mnt/repositories/repo/ZedLive/src/domain/ZedLive.Domain/ZedLive.Domain.csproj"
             }
           }
         }
@@ -2750,7 +2747,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

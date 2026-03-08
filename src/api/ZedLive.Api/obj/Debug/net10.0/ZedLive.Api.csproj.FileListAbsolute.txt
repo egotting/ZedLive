@@ -135,3 +135,6 @@ E:\repo\ZedLive\src\api\ZedLive.Api\obj\Debug\net10.0\refint\ZedLive.Api.dll
 E:\repo\ZedLive\src\api\ZedLive.Api\obj\Debug\net10.0\ZedLive.Api.pdb
 E:\repo\ZedLive\src\api\ZedLive.Api\obj\Debug\net10.0\ZedLive.Api.genruntimeconfig.cache
 E:\repo\ZedLive\src\api\ZedLive.Api\obj\Debug\net10.0\ref\ZedLive.Api.dll
+E:\repo\ZedLive\src\api\ZedLive.Api\bin\Debug\net10.0\MediatR.dll
+E:\repo\ZedLive\src\api\ZedLive.Api\bin\Debug\net10.0\MediatR.Contracts.dll
+E:\repo\ZedLive\src\api\ZedLive.Api\bin\Debug\net10.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
