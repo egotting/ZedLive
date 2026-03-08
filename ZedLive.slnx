@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/api/">
+    <Project Path="src/api/ZedLive.Api/ZedLive.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/application/">
+    <Project Path="src/application/ZedLive.Application/ZedLive.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/domain/">
+    <Project Path="src/domain/ZedLive.Domain/ZedLive.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/infrastructure/">
+    <Project Path="src/infrastructure/ZedLive.Infrastructure/ZedLive.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/ioc/">
+    <Project Path="src/ioc/ZedLive.IoC/ZedLive.IoC.csproj" />
+  </Folder>
+  <Folder Name="/src/tests/">
+    <Project Path="src/tests/ZedLive.Tests/ZedLive.Tests.csproj" />
+  </Folder>
+</Solution>
