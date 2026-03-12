@@ -40,7 +40,7 @@ public sealed class JwtStream(IOptions<StreamOptions> options, ILogger<JwtStream
         };
         var token = tokenHandler.CreateToken(tokenDecriptor);
         var tokenConvert = tokenHandler.WriteToken(token);
-        logger.LogInformation("Stream Key generated for user {Username}", user.Email);
+        logger.LogInformation("Stream Key generated for user {Username}", user.Id);
         return $"{tokenConvert}-${keyPass}";
     }
 
