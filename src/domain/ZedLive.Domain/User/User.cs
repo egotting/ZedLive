@@ -8,29 +8,34 @@ public class User : DefaultEntities
     public string? Login { get; set; } = string.Empty;
     public EmailObject Email { get; set; }
     public PasswordObject Password { get; set; }
-    public string Salt { get; set; } = string.Empty;
+    public byte[] Salt { get; set; } = [];
 
     public IEnumerable<StatusUser> Status { get; set; }
 
     public string StreamKey { get; set; }
 
     #region constrctor to EF CORE
-    private User()
+
+    private User(string streamKey)
     {
+        StreamKey = streamKey;
         // EF CORE
     }
+
     #endregion
 
 
-    public static User CreateUser(string login, EmailObject email, PasswordObject password, string salt)
-        => new User(login, email, password, salt,StatusUser.Online);
+    public static User CreateUser(string? login, string email, string password, byte[] salt, string streamKey)
+        => new User(login, new EmailObject(email), new PasswordObject(password), salt, streamKey, StatusUser.Online);
 
-    public User(string login, EmailObject email, PasswordObject password, string salt, StatusUser statusUser)
+    private User(string? login, EmailObject email, PasswordObject password, byte[] salt,
+        string streamKey, StatusUser statusUser)
     {
         Login = login;
         Email = email;
         Password = password;
         Salt = salt;
+        StreamKey = streamKey;
         Status = [statusUser];
     }
 }

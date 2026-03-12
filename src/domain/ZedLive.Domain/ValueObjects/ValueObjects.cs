@@ -8,6 +8,7 @@ public abstract class ValueObjects : IEquatable<ValueObjects>
 {
     private List<PropertyInfo> _properties;
     private List<FieldInfo> _fields;
+    protected abstract IEnumerable<object> GetEqualityComponents();
 
     public static bool operator ==(ValueObjects obj1, ValueObjects obj2)
     {
@@ -19,17 +20,21 @@ public abstract class ValueObjects : IEquatable<ValueObjects>
         return !(obj1 == obj2);
     }
 
-    public bool Equals(ValueObjects? obj)
-    {
-        return Equals(obj as object);
-    }
-
     public override bool Equals(object? obj)
     {
-        if (obj is null) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != GetType()) return false;
-        return Equals((ValueObjects)obj);
+        if (obj is not ValueObjects other)
+            return false;
+
+        return Equals(other);
+    }
+
+    public bool Equals(ValueObjects? other)
+    {
+        if (other is null || other.GetType() != GetType())
+            return false;
+
+        return GetEqualityComponents()
+            .SequenceEqual(other.GetEqualityComponents());
     }
 
     public override int GetHashCode()

@@ -34,22 +34,18 @@ public class UserMapping : IEntityTypeConfiguration<User>
             pass.Property(p => p.Value)
                 .HasColumnName("password")
                 .HasColumnType("varchar")
-                .HasMaxLength(8)
                 .IsRequired();
         });
-        
+
         builder.Property(x => x.Salt)
             .HasColumnName("salt")
-            .HasColumnType("varchar")
-            .HasMaxLength(8)
             .IsRequired();
-        
+
         builder.Property(x => x.StreamKey)
-            .HasColumnName("stream_key")
-            .HasMaxLength(250);
+            .HasColumnName("stream_key");
         builder.HasIndex(x => x.StreamKey)
             .IsUnique();
-        
+
         builder.OwnsMany<StatusUser>("Status", b =>
         {
             b.WithOwner().HasForeignKey("Id");

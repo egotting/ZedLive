@@ -1,14 +1,34 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace ZedLive.Domain.ValueObjects;
 
-public sealed class EmailObject(string value) : ValueObjects
+public sealed class EmailObject : ValueObjects
 {
-    [EmailAddress(ErrorMessage = "Invalid Email")]
-    public string Value { get; set; } = value;
+    public string Value { get; }
 
-    public override string ToString()
+    public EmailObject(string value)
     {
-        return Value;
+        if (string.IsNullOrWhiteSpace(value))
+            throw new ArgumentException("Email cannot be null or empty");
+
+        if (!IsValidEmail(value))
+            throw new ArgumentException("Invalid email");
+
+        Value = value;
+    }
+
+    private static bool IsValidEmail(string email)
+    {
+        return Regex.IsMatch(email,
+            @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+            RegexOptions.IgnoreCase);
+    }
+
+    public override string ToString() => Value;
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
     }
 }

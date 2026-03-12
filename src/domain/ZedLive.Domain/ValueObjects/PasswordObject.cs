@@ -10,40 +10,34 @@ public sealed class PasswordObject : ValueObjects
     private const int Interations = 100000;
 
     private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
-    private readonly ILogger<PasswordObject> _logger;
-    public string Value { get; set; }
+    public string Value { get; }
 
     public PasswordObject(string value)
     {
         if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
             throw new ArgumentException("Password Invalid");
-        Value = value.Length switch
-        {
-            < 1 => throw new ArgumentException("Need until 8 characters"),
-            > 8 => throw new ArgumentException("Cannot pass the 8 characters"),
-            _ => value
-        };
-         _logger.LogInformation($"Instance {nameof(PasswordObject)}");
+        Value = value;
     }
 
-    public static (string password, string salt) Hash(string value)
+    public static (string password, byte[] salt) Hash(string value)
     {
         if (string.IsNullOrEmpty(value)) throw new ArgumentException("Need put a value");
         byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
         byte[] hash = Rfc2898DeriveBytes.Pbkdf2(value, salt, Interations, Algorithm, HashSize);
-        return (Convert.ToHexString(hash), Convert.ToHexString(salt));
+        return (Convert.ToHexString(hash), salt);
     }
 
-    public static bool Verify(string value, string salt, string password)
+    public static bool Verify(string value, byte[] salt, string password)
     {
-        if (string.IsNullOrEmpty(value))
+        if (String.IsNullOrWhiteSpace(password))
             throw new ArgumentException("Need put a value");
-        byte[] saltBytes = Convert.FromBase64String(salt);
-        byte[] encrypt = Rfc2898DeriveBytes.Pbkdf2(password, saltBytes, Interations, Algorithm, HashSize);
-        
-        
-        string passwordDb = $"{Convert.FromBase64String(value)}{Convert.FromBase64String(salt)}";
-        string passwordLogin = Convert.ToString(encrypt);
-        return string.Equals(passwordLogin, passwordDb);
+        byte[] encrypt = Rfc2898DeriveBytes.Pbkdf2(password, salt, Interations, Algorithm, HashSize);
+        var loginPw = Convert.ToHexString(encrypt);
+        return (string.Equals(loginPw, value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
     }
 }
