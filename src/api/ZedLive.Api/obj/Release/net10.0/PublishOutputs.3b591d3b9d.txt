@@ -1,7 +1,0 @@
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\ZedLive.Api.exe
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\appsettings.Development.json
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\appsettings.json
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\ZedLive.Api.dll
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\ZedLive.Api.deps.json
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\ZedLive.Api.runtimeconfig.json
-E:\repo\ZedLive\src\api\ZedLive.Api\bin\Release\net10.0\publish\ZedLive.Api.pdb

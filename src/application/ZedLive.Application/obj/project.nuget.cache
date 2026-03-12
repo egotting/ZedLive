@@ -1,21 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "qKHbjzMLXcM=",
+  "dgSpecHash": "KrHR3JF82KQ=",
   "success": true,
-  "projectFilePath": "/mnt/repositories/repo/ZedLive/src/application/ZedLive.Application/ZedLive.Application.csproj",
+  "projectFilePath": "E:\\repo\\ZedLive\\src\\application\\ZedLive.Application\\ZedLive.Application.csproj",
   "expectedPackageFiles": [
-    "/home/4yn/.nuget/packages/mediatr/11.1.0/mediatr.11.1.0.nupkg.sha512",
-    "/home/4yn/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/10.0.2/microsoft.aspnetcore.authentication.jwtbearer.10.0.2.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.2/microsoft.extensions.dependencyinjection.abstractions.10.0.2.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.2/microsoft.extensions.logging.abstractions.10.0.2.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.identitymodel.abstractions/8.0.1/microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.1/microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.identitymodel.logging/8.0.1/microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.identitymodel.protocols/8.0.1/microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/8.0.1/microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/microsoft.identitymodel.tokens/8.0.1/microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
-    "/home/4yn/.nuget/packages/system.identitymodel.tokens.jwt/8.0.1/system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
+    "C:\\Users\\Administrator\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.2\\microsoft.aspnetcore.authentication.jwtbearer.10.0.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.2\\microsoft.extensions.dependencyinjection.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.2\\microsoft.extensions.logging.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.0.1\\microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.0.1\\microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.logging\\8.0.1\\microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.protocols\\8.0.1\\microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\8.0.1\\microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.0.1\\microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
   ],
   "logs": []
 }

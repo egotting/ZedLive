@@ -10,6 +10,7 @@ E:/repo/ZedLive/src/domain/ZedLive.Domain/obj/Debug/net10.0/ZedLive.Domain.dll
 E:/repo/ZedLive/src/domain/ZedLive.Domain/obj/Debug/net10.0/refint/ZedLive.Domain.dll
 E:/repo/ZedLive/src/domain/ZedLive.Domain/obj/Debug/net10.0/ZedLive.Domain.pdb
 E:/repo/ZedLive/src/domain/ZedLive.Domain/obj/Debug/net10.0/ref/ZedLive.Domain.dll
+E:/repo/ZedLive/src/domain/ZedLive.Domain/obj/Debug/net10.0/ZedLive.Domain.csproj.AssemblyReference.cache
 /mnt/repositories/repo/ZedLive/src/domain/ZedLive.Domain/bin/Debug/net10.0/ZedLive.Domain.deps.json
 /mnt/repositories/repo/ZedLive/src/domain/ZedLive.Domain/bin/Debug/net10.0/ZedLive.Domain.dll
 /mnt/repositories/repo/ZedLive/src/domain/ZedLive.Domain/bin/Debug/net10.0/ZedLive.Domain.pdb
