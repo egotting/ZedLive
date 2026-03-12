@@ -20,8 +20,18 @@ public class RepositoryBase<T>(ZedLiveContext _context) : IRepository<T> where T
         CancellationToken cancellationToken)
         => await _dbSet.Where(predicate).ToListAsync(cancellationToken);
 
-    public async Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
-        => await _dbSet.SingleOrDefaultAsync(predicate, cancellationToken);
+    public async Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken,
+        bool AsTracking = false)
+    {
+        if (AsTracking)
+        {
+            return await _dbSet
+                .AsTracking()
+                .FirstOrDefaultAsync(predicate, cancellationToken);
+        }
+
+        return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
+    }
 
     public async Task AddAsync(T entity, CancellationToken cancellationToken)
         => await _dbSet.AddAsync(entity, cancellationToken);
