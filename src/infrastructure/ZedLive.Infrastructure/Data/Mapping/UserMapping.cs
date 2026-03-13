@@ -18,6 +18,11 @@ public class UserMapping : IEntityTypeConfiguration<User>
             .IsUnicode(false);
         builder.HasIndex(x => x.Login)
             .IsUnique();
+
+        builder.Property(x => x.StatusUserId)
+            .HasColumnName("status_user_id")
+            .HasDefaultValue(1)
+            .IsRequired();
         builder.OwnsOne(e => e.Email, email =>
         {
             email.Property(e => e.Value)
@@ -46,13 +51,8 @@ public class UserMapping : IEntityTypeConfiguration<User>
         builder.HasIndex(x => x.StreamKey)
             .IsUnique();
 
-        builder.OwnsMany<StatusUser>("Status", b =>
-        {
-            b.WithOwner().HasForeignKey("Id");
-            b.ToTable("tb_status_user", "dbo");
-            b.Property<long>("Id");
-            b.Property<string>("Value").HasColumnType("varchar");
-            b.HasKey("Id", "Value");
-        });
+        builder.HasOne(x => x.StatusUser)
+            .WithOne()
+            .HasForeignKey<User>(x => x.StatusUserId);
     }
 }
