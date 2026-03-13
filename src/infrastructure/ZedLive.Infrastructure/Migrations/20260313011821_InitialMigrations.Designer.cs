@@ -12,7 +12,7 @@ using ZedLive.Infrastructure.Data.Context;
 namespace ZedLive.Infrastructure.Migrations
 {
     [DbContext(typeof(ZedLiveContext))]
-    [Migration("20260312230449_InitialMigrations")]
+    [Migration("20260313011821_InitialMigrations")]
     partial class InitialMigrations
     {
         /// <inheritdoc />
@@ -24,6 +24,37 @@ namespace ZedLive.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("ZedLive.Domain.User.StatusUser", b =>
+                {
+                    b.Property<byte>("id")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("value")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tb_status_user", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            id = (byte)1,
+                            value = "Online"
+                        },
+                        new
+                        {
+                            id = (byte)2,
+                            value = "Offline"
+                        },
+                        new
+                        {
+                            id = (byte)3,
+                            value = "Inactive"
+                        });
+                });
 
             modelBuilder.Entity("ZedLive.Domain.User.User", b =>
                 {
@@ -49,6 +80,12 @@ namespace ZedLive.Infrastructure.Migrations
                         .HasColumnType("bytea")
                         .HasColumnName("salt");
 
+                    b.Property<byte>("StatusUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValue((byte)1)
+                        .HasColumnName("status_user_id");
+
                     b.Property<string>("StreamKey")
                         .IsRequired()
                         .HasColumnType("text")
@@ -62,6 +99,9 @@ namespace ZedLive.Infrastructure.Migrations
                     b.HasIndex("Login")
                         .IsUnique();
 
+                    b.HasIndex("StatusUserId")
+                        .IsUnique();
+
                     b.HasIndex("StreamKey")
                         .IsUnique();
 
@@ -70,21 +110,11 @@ namespace ZedLive.Infrastructure.Migrations
 
             modelBuilder.Entity("ZedLive.Domain.User.User", b =>
                 {
-                    b.OwnsMany("ZedLive.Domain.User.StatusUser", "Status", b1 =>
-                        {
-                            b1.Property<long>("Id")
-                                .HasColumnType("bigint");
-
-                            b1.Property<string>("Value")
-                                .HasColumnType("varchar");
-
-                            b1.HasKey("Id", "Value");
-
-                            b1.ToTable("tb_status_user", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Id");
-                        });
+                    b.HasOne("ZedLive.Domain.User.StatusUser", "StatusUser")
+                        .WithOne()
+                        .HasForeignKey("ZedLive.Domain.User.User", "StatusUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.OwnsOne("ZedLive.Domain.ValueObjects.EmailObject", "Email", b1 =>
                         {
@@ -132,7 +162,7 @@ namespace ZedLive.Infrastructure.Migrations
                     b.Navigation("Password")
                         .IsRequired();
 
-                    b.Navigation("Status");
+                    b.Navigation("StatusUser");
                 });
 #pragma warning restore 612, 618
         }
