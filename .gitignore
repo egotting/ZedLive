@@ -13,7 +13,7 @@
 *.info
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+*.json
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
