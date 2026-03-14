@@ -1,6 +1,10 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OpenApi;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Npgsql.Internal.Postgres;
@@ -28,35 +32,7 @@ internal sealed class Startup
 
         #region Scalar
 
-        services.AddOpenApi(opt =>
-        {
-            opt.AddDocumentTransformer((document, context, cancellationToken) =>
-            {
-                document.Components ??= new OpenApiComponents();
-                document.Components.SecuritySchemes ??=
-                    new Dictionary<string, IOpenApiSecurityScheme>();
-                document.Components.SecuritySchemes["Bearer"] = new OpenApiSecurityScheme
-                {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    BearerFormat = "JWT",
-                    In = ParameterLocation.Header
-                };
-
-                document.Security ??= new List<OpenApiSecurityRequirement>();
-
-                document.Security.Add(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecuritySchemeReference("Bearer"),
-                        new List<string>(Array.Empty<string>())
-                    }
-                });
-
-                return Task.CompletedTask;
-            });
-        });
+        services.AddOpenApi("v1", options => { options.AddDocumentTransformer<BearerSecuritySchemeTransformer>(); });
 
         #endregion
 
@@ -85,12 +61,9 @@ internal sealed class Startup
 
         #region Options
 
-        services.AddOptions<StreamOptions>()
-            .BindConfiguration("Stream");
-        services.AddOptions<JwtOptions>()
-            .BindConfiguration("Jwt");
-        services.AddOptions<ConnectionStringsOptions>()
-            .BindConfiguration("DbConnection");
+        services.Configure<StreamOptions>(_configuration.GetSection("Stream"));
+        services.Configure<JwtOptions>(_configuration.GetSection("Jwt"));
+        services.Configure<ConnectionStringsOptions>(_configuration.GetSection("DbConnection"));
 
         #endregion
 
@@ -102,25 +75,29 @@ internal sealed class Startup
 
         #region Configuration Authentication & Authorization
 
-        services.AddAuthentication(opt =>
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer();
+
+        services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
+            .Configure<IOptions<JwtOptions>>((opt, jwtOptions) =>
             {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(opt =>
-            {
-                var jwtSettings = _configuration.GetSection("Jwt").Get<JwtOptions>();
-                opt.RequireHttpsMetadata = true;
+                var jwt = jwtOptions.Value;
+
+                opt.RequireHttpsMetadata = false;
                 opt.SaveToken = true;
+
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.SecretKey)),
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwt.SecretKey)),
                     ValidateIssuer = true,
+                    ValidIssuer = jwt.Issuer,
                     ValidateAudience = true,
-                    ValidAudience = jwtSettings.Audience,
+                    ValidAudience = jwt.Audience,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(1)
+                    ClockSkew = TimeSpan.FromMinutes(1),
+                    NameClaimType = ClaimTypes.NameIdentifier
                 };
                 opt.Events = new JwtBearerEvents
                 {
@@ -147,7 +124,7 @@ internal sealed class Startup
     {
         app.UseCors(builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
 
-        app.UseHttpsRedirection();
+        // app.UseHttpsRedirection();
         app.UseRouting();
 
         app.UseAuthentication();
@@ -163,5 +140,50 @@ internal sealed class Startup
                     .WithTheme(ScalarTheme.Purple);
             });
         });
+    }
+
+    internal sealed class BearerSecuritySchemeTransformer : IOpenApiDocumentTransformer
+    {
+        private readonly IAuthenticationSchemeProvider _authenticationSchemeProvider;
+
+        public BearerSecuritySchemeTransformer(IAuthenticationSchemeProvider authenticationSchemeProvider)
+        {
+            _authenticationSchemeProvider = authenticationSchemeProvider;
+        }
+
+        public async Task TransformAsync(OpenApiDocument document, OpenApiDocumentTransformerContext context,
+            CancellationToken cancellationToken)
+        {
+            var authenticationSchemes = await _authenticationSchemeProvider.GetAllSchemesAsync();
+            if (!authenticationSchemes.Any(a => a.Name == "Bearer"))
+                return;
+
+            var bearerScheme = new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "JWT Authorization header using the Bearer scheme."
+            };
+
+            document.Components ??= new OpenApiComponents();
+
+            document.AddComponent("Bearer", bearerScheme);
+
+            var securityRequirement = new OpenApiSecurityRequirement
+            {
+                [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+            };
+
+            foreach (var path in document.Paths.Values)
+            {
+                foreach (var operation in path.Operations.Values)
+                {
+                    operation.Security ??= new List<OpenApiSecurityRequirement>();
+                    operation.Security.Add(securityRequirement);
+                }
+            }
+        }
     }
 }

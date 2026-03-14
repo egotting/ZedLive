@@ -18,15 +18,15 @@ public sealed class JwtStream(IOptions<StreamOptions> options, ILogger<JwtStream
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var keyPass = CreateKey();
-        var key = Encoding.ASCII.GetBytes(_streamOptions.SecretKey);
+        var key = Encoding.UTF8.GetBytes(_streamOptions.SecretKey);
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email.Value),
             new(JwtRegisteredClaimNames.Iat, _streamOptions.TimeTokenIsCreated),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Jti, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),
-                ClaimValueTypes.Integer32)
+            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),
+                ClaimValueTypes.Integer64)
         };
 
         var tokenDecriptor = new SecurityTokenDescriptor
