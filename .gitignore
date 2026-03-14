@@ -13,7 +13,22 @@
 *.info
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+# Ignorar arquivos obj gerados em todo o projeto
+*.obj
 
+# Ignorar arquivos cache gerados
+*.cache
+
+# Ignorar arquivos AssemblyInfo.cs gerados
+*.AssemblyInfo.cs
+
+# Caso queira ignorar pastas específicas, pode usar:
+src/api/ZedLive.Api/obj/
+src/api/ZedLive.Application/obj/
+src/domain/ZedLive.Domain/obj/
+src/infrastructure/ZedLive.Infrastructure/obj/
+src/loc/ZedLive.loc/obj/
+src/tests/ZedLive.Tests/obj/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
