@@ -19,21 +19,22 @@ public sealed class Jwt(IOptions<JwtOptions> opt, ILogger<Jwt> _logger) : IJwt
     public string Generate(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_jwtOptions.SecretKey);
+        var key = Encoding.UTF8.GetBytes(_jwtOptions.SecretKey);
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, user.Login),
             new(ClaimTypes.Email, user.Email.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Jti, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),
-                ClaimValueTypes.Integer32)
+            new(JwtRegisteredClaimNames.Iat,
+                DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),
+                ClaimValueTypes.Integer64)
         };
 
         var tokenDecriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.AccessTokenExpirationMinutes),
+            Expires = DateTime.UtcNow.AddHours(_jwtOptions.AccessTokenExpirationHours),
             Issuer = _jwtOptions.Issuer,
             Audience = _jwtOptions.Audience,
             SigningCredentials = new SigningCredentials(
@@ -43,7 +44,7 @@ public sealed class Jwt(IOptions<JwtOptions> opt, ILogger<Jwt> _logger) : IJwt
         };
         var token = tokenHandler.CreateToken(tokenDecriptor);
         var tokenConvert = tokenHandler.WriteToken(token);
-        _logger.LogInformation("Stream Key generated for user {Username}", user.Email);
+        _logger.LogInformation("token generated for user {Username}, {tokenConvert}", user.Email, tokenConvert);
         return tokenConvert;
     }
 

@@ -13,12 +13,22 @@ public class RepositoryBase<T>(ZedLiveContext _context) : IRepository<T> where T
     public async Task<T?> GetByIdAsync(int Id, CancellationToken cancellationToken)
         => await _dbSet.FindAsync(Id, cancellationToken);
 
-    public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken)
-        => await _dbSet.ToListAsync(cancellationToken);
+    public async Task<IEnumerable<T>> GetAllAsync(int take, int size, CancellationToken cancellationToken)
+        => await _dbSet
+            .Skip(take)
+            .Take(size)
+            .OrderBy(x => x)
+            .ToListAsync(cancellationToken);
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate,
+        int take,
+        int size,
         CancellationToken cancellationToken)
-        => await _dbSet.Where(predicate).ToListAsync(cancellationToken);
+        => await _dbSet.Where(predicate)
+            .Skip(take)
+            .Take(size)
+            .OrderBy(x => x)
+            .ToListAsync(cancellationToken);
 
     public async Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken,
         bool AsTracking = false)

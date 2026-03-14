@@ -16,11 +16,5 @@ public class StatusUserMapping : IEntityTypeConfiguration<StatusUser>
             .IsRequired();
 
         builder.HasKey("id");
-
-        builder.HasData(
-            new { id = (byte)1, value = "Online" },
-            new { id = (byte)2, value = "Offline" },
-            new { id = (byte)3, value = "Inactive" }
-        );
     }
 }
